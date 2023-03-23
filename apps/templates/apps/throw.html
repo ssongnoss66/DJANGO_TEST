@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+
+
+{% block content %}
+  <h1>throw</h1>
+  <form action="http://127.0.0.1:8000/catch/" method="GET">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" name="message">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit">SUBMIT</button>
+      </div>
+    </div>
+  </form>
+{% endblock content %}

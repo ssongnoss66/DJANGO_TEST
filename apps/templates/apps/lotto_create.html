@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+<form method="get" action="http://127.0.0.1:8000/lotto/">
+  <div class="input-group">
+    <input type="number" class="form-control" name="number" placeholder="로또 생성 수">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">SUBMIT</button>
+    </div>
+  </div>
+</form>
+{% endblock content %}
