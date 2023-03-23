@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from apps import views
+from django.urls import path, include
+# WARNINGS: (urls.W005) URL namespace 'MayTwentyThird' isn't unique. You may not be able to reverse all URLs in this namespace
+# https://comdoc.tistory.com/entry/URL-namespace-xxx-isnt-unique
 
 urlpatterns = [
+    path('', include('MarchTwentyThird.urls')),
     path('admin/', admin.site.urls),
-    path('today_dinner/', views.today_dinner),
-    path('throw/', views.throw),
-    path('catch/', views.catch),
-    path('lotto_create/', views.lotto_create),
-    path('lotto/', views.lotto)
+    path('articles/', include('articles.urls')),
+    path('apps/', include('apps.urls')),
+    path('MarchTwentyThird/', include('MarchTwentyThird.urls')),
 ]

@@ -2,15 +2,6 @@ from django.shortcuts import render
 import random
 
 # Create your views here.
-def today_dinner(request):
-    foods = ['치킨', '삼겹살', '짜장면', '비빔밥', '햄버거']
-    picked = random.choice(foods)
-    context = {
-        'foods': foods,
-        'picked': picked,
-    }
-    return render(request, 'apps/today_dinner.html', context)
-
 def throw(request):
     return render(request, 'apps/throw.html')
 
@@ -39,3 +30,15 @@ def lotto(request):
         'LottorLi': LottorLi,
     }
     return render(request, 'apps/lotto.html', context)
+
+def detail(request, num):
+    context = {
+        'num': num,
+    }
+    return render(request, 'apps/detail.html', context)
+
+def greeting(request, name):
+    context = {
+        'name': name,
+    }
+    return render(request, 'apps/greeting.html', context)

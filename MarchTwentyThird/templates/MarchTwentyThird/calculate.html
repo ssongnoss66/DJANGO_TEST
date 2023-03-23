@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>{{ number1 }} + {{ number2 }} = {{ number1|add:number2 }}</h1>
+  <h1>{{ number1 }} - {{ number2 }} = {{ number1|sub:number2 }}</h1>
+  <h1>{{ number1 }} * {{ number2 }} = {{ number1|mul:number2 }}</h1>
+  <h1>{{ number1 }} / {{ number2 }} = {{ number1|intdiv:number2 }}</h1>
+{% endblock content %}

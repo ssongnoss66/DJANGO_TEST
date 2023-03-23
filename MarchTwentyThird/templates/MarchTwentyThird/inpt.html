@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/number_print/1/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">1</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/number_print/2/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">2</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/number_print/3/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">3</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/number_print/4/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">4</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/number_print/5/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">5</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/calculate/10/2/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">10 2</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/calculate/20/4/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">20 4</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/calculate/3/30/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">3 30</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/calculate/5/70/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">5 70</button>
+  </form>
+  <form action="http://127.0.0.1:8000/MarchTwentyThird/calculate/100/4/">
+    <button class="btn btn-outline-secondary mt-5" type="submit">100 4</button>
+  </form>
+{% endblock content %}
