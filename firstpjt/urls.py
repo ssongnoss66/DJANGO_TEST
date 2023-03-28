@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 # WARNINGS: (urls.W005) URL namespace 'MayTwentyThird' isn't unique. You may not be able to reverse all URLs in this namespace
 # https://comdoc.tistory.com/entry/URL-namespace-xxx-isnt-unique
+from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', include('MarchTwentyThird.urls')),
+    path('', lambda request: redirect('MarchTwentyThird/')),
     path('admin/', admin.site.urls),
     path('articles/', include('articles.urls')),
     path('apps/', include('apps.urls')),
