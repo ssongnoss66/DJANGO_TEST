@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps',
     'articles',
     'MarchTwentyThird',
+    'todos',
     'mathfilters',
     'django.contrib.admin',
     'django.contrib.auth',
