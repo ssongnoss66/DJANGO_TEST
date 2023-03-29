@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 40px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>Todos CREATE</h1>
+  <hr>
+  <div class="card border-dark mb-3">
+    <div class="card-header">
+      {{ title }}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ content }}</li>
+      <li class="list-group-item">{{ priority }}</li>
+      <li class="list-group-item">{{ deadline }}</li>
+    </ul>
+  </div>
+  <div class="d-grid">
+    <a href="{%url 'todos:index'%}" class="btn border-dark">BACK</a>
+  </div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 40px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>Todos DETAIL</h1>
+  <hr>
+
+  <div class="card border-dark" style="margin-bottom: 1rem;">
+    <div class="card-header">
+      {{ todo_pk.pk }}. {{ todo_pk.title }}</a>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">할 일 내용: {{ todo_pk.content }}</li>
+      <li class="list-group-item">할 일 우선순위: {{ todo_pk.priority }}</li>
+      <li class="list-group-item">할 일 마감기한: {{ todo_pk.deadline }}</li>
+    </ul>
+  </div>
+  <div class="d-grid">
+    <a href="{%url 'todos:index'%}" class="btn border-dark">BACK</a>
+  </div>
+{% endblock content %}

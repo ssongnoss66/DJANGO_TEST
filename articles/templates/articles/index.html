@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    * {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+{% block content %}
+  <h1>ARTICLES</h1>
+  <p>{{ articles }}</p>
+  <hr>
+  <p>새로운 입력:<a href="{% url 'articles:new' %}">NEW</a></p>
+  {% for article in articles %}
+    <p>{{ article }}</p>
+    <p>글 번호: {{ article.pk }}</p>
+    <p>글 제목:<a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></p>
+  {% endfor %}
+{% endblock content %}

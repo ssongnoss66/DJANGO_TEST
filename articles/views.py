@@ -1,12 +1,30 @@
 from django.shortcuts import render
-import random
-
+from .models import Article
 # Create your views here.
-def today_dinner(request):
-    foods = ['치킨', '삼겹살', '짜장면', '비빔밥', '햄버거']
-    picked = random.choice(foods)
+def index(request):
+    articles = Article.objects.all()
     context = {
-        'foods': foods,
-        'picked': picked,
+        'articles': articles,
     }
-    return render(request, 'articles/today_dinner.html', context)
+    return render(request, 'articles/index.html', context)
+
+def detail(request, pk):
+    article = Article.objects.get(pk=pk)
+    context = {
+        'article': article,
+    }
+    return render(request, 'articles/detail.html', context)
+
+def new(request):
+    return render(request, 'articles/new.html')
+
+def create(request):
+    ttl = request.GET.get('title')
+    cntnt = request.GET.get('content')
+    article = Article(title=ttl, content=cntnt)
+    article.save()
+    context = {
+        'ttl': ttl,
+        'cntnt': cntnt,
+    }
+    return render(request, 'articles/create.html', context)

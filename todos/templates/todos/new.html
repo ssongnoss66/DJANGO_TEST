@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 40px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>Todos NEW</h1>
+  <hr>
+  <form action="{%url 'todos:create' %}">
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 제목</span>
+      <input type="text" id="title" name="title" class="form-control" placeholder="TITLE" aria-label="TITLE" aria-describedby="addon-wrapping">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 내용</span>
+      <input type="textarea" id="content" name="content" class="form-control" placeholder="CONTENT" aria-label="CONTENT" aria-describedby="addon-wrapping">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 우선순위</span>
+      <input type="number" id="priority" name="priority" class="form-control" placeholder="PRIOIRTY" aria-label="PRIOIRTY" aria-describedby="addon-wrapping">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 마감기한</span>
+      <input type="date" id="deadline" name="deadline" class="form-control" placeholder="DEADLINE" aria-label="DEADLINE" aria-describedby="addon-wrapping">
+    </div>
+    <div class="input-group flex-nowrap">
+      <input type="submit" class="form-control border-dark" placeholder="SUBMIT" aria-label="SUBMIT" aria-describedby="addon-wrapping">
+    </div>
+  </form>
+{% endblock content %}

@@ -42,3 +42,12 @@ def greeting(request, name):
         'name': name,
     }
     return render(request, 'apps/greeting.html', context)
+
+def todaydinner(request):
+    foods = ['chicken', 'hamburger', 'bulgogi', 'gimbap']
+    picked = random.choice(foods)
+    context = {
+        'foods':foods,
+        'picked':picked,
+    }
+    return render(request, 'apps/todaydinner.html', context)

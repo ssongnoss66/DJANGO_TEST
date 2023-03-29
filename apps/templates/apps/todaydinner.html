@@ -13,6 +13,6 @@
 {% endblock style %}
 
 {% block content %}
-  <h1>오늘의 추천 메뉴는 <span>{{ picked }}</span>입니다.</h1>
-  <a href="{% url 'articles:today_dinner' %}">dinner</a>
+  <h1>Today's recommendation is <span>{{ picked }}</span>!</h1>
+  <a href="{% url 'apps:todaydinner'%}">dinner</a>
 {% endblock content %}

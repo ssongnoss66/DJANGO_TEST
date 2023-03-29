@@ -32,10 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'apps',
-    'articles',
     'MarchTwentyThird',
     'todos',
     'newspapers',
+    'articles',
     'django_extensions',
     'mathfilters',
     'django.contrib.admin',

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+{% block content %}
+  <h1>CREATE</h1>
+  <p>{{ ttl }} : {{ cntnt }}</p>
+  <a href="{% url 'articles:index' %}">[back]</a>
+{% endblock content %}

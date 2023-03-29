@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 40px;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>Todos DELETE</h1>
+  <hr>
+  <div class="d-grid">
+    <a href="{%url 'todos:index'%}" class="btn border-dark">BACK</a>
+  </div>
+{% endblock content %}
