@@ -18,11 +18,40 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">할 일 내용: {{ todo_pk.content }}</li>
-      <li class="list-group-item">할 일 우선순위: {{ todo_pk.priority }}</li>
-      <li class="list-group-item">할 일 마감기한: {{ todo_pk.deadline }}</li>
+      <li class="list-group-item">할 일 우선 순위: {{ todo_pk.priority }}</li>
+      <li class="list-group-item">할 일 마감 기한: {{ todo_pk.deadline }}</li>
+      <li class="list-group-item">할 일 마감 여부: {{ todo_pk.completed }}</li>
     </ul>
   </div>
-  <div class="d-grid">
-    <a href="{%url 'todos:index'%}" class="btn border-dark">BACK</a>
+
+  <div>
+    <div class="row">
+      <div class="col">
+        <form action="{% url 'todos:check' todo_pk.pk %}" method="POST">
+          {% csrf_token %}
+          <div class="d-grid">
+            <input class="btn bg-dark text-white" type="submit" value="CHECK">
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <form action="{% url 'todos:delete' todo_pk.pk %}" method="POST">
+          {% csrf_token %}
+          <div class="d-grid">
+            <input class="btn border-dark" type="submit" value="DELETE">
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <div class="d-grid">
+          <a href="{%url 'todos:edit' todo_pk.pk %}" class="btn border-dark">EDIT</a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="d-grid">
+          <a href="{%url 'todos:index'%}" class="btn border-dark">BACK</a>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock content %}

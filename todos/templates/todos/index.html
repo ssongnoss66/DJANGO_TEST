@@ -21,31 +21,19 @@
     </ul>
     {% for todo in todos %}
     <div class="card-header">
-      {{ todo.pk }}. <a href="{%url 'todos:detail' todo.pk %}">{{ todo.title }}</a>
-      <a href="javascript:void(0)" class="delete btn" data-uri="{%url 'todos:delete' todo.pk%}">삭제</a>
-      <!--
-        a href='javascript:void(0)" ; undefined를 얻기 위함, 즉, 해당하는 링크가 정상적으로 동작하지 않게 만들기 위하여
-        data-uri="{%url 'todos:delete' todo.pk%}" ; 삭제를 실행할 URL을 얻기 위해 data-uri 속성을 추가
-      -->
+      {% if todo.completed == True %}
+        {{ todo.pk }}. <a href="{%url 'todos:detail' todo.pk %}"><s>{{ todo.title }}</s></a>
+      {% else %}
+        {{ todo.pk }}. <a href="{%url 'todos:detail' todo.pk %}">{{ todo.title }}</a>
+      {% endif %}
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">할 일 내용: {{ todo.content }}</li>
-      <li class="list-group-item">할 일 우선순위: {{ todo.priority }}</li>
-      <li class="list-group-item">할 일 마감기한: {{ todo.deadline }}</li>
+      <li class="list-group-item">할 일 우선 순위: {{ todo.priority }}</li>
+      <li class="list-group-item">할 일 마감 기한: {{ todo.deadline }}</li>
+      <li class="list-group-item">할 일 마감 여부: {{ todo.completed }}</li>
     </ul>
   {% endfor %}
   </div>
-  {% block script %}
-  <script type='text/javascript'>
-  const delete_elements = document.getElementsByClassName("delete");
-  Array.from(delete_elements).forEach(function(element) {
-      element.addEventListener('click', function() {
-          if(confirm("정말로 삭제하시겠습니까?")) {
-              location.href = this.dataset.uri;
-          };
-      });
-  });
-  </script>
-  {% endblock script %}
 {% endblock content %}
 

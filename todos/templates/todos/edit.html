@@ -9,9 +9,9 @@
 {% endblock style %}
 
 {% block content %}
-  <h1>Todos NEW</h1>
+  <h1>Todos EDIT</h1>
   <hr>
-  <form action="{%url 'todos:create' %}" method="POST">
+  <form action="{% url 'todos:update' todo.pk %}" method="POST">
     {% csrf_token %}
     <div class="input-group flex-nowrap mb-3">
       <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 제목</span>
@@ -29,8 +29,11 @@
       <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 마감 기한</span>
       <input type="date" id="deadline" name="deadline" class="form-control" placeholder="DEADLINE" aria-label="DEADLINE" aria-describedby="addon-wrapping" value="{{ cur_date|date:"Y-m-d" }}">
     </div>
-    <div class="input-group flex-nowrap">
+    <div class="input-group flex-nowrap mb-3">
       <input type="submit" class="form-control border-dark" placeholder="SUBMIT" aria-label="SUBMIT" aria-describedby="addon-wrapping">
+    </div>
+    <div class="d-grid" style="margin-bottom: 1rem;">
+      <a href="{%url 'todos:index'%}" class="btn border-dark">BACK</a>
     </div>
   </form>
 {% endblock content %}

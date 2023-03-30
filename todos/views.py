@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Todo
+from datetime import date
 
 # Create your views here.
 def index(request):
@@ -17,13 +18,17 @@ def detail(request, pk):
     return render(request, 'todos/detail.html', context)
 
 def new(request):
-    return render(request, 'todos/new.html')
+    cur_date = date.today()
+    context = {
+        'cur_date' : cur_date
+    }
+    return render(request, 'todos/new.html', context)
 
 def create(request):
-    title = request.GET.get('title')
-    content = request.GET.get('content')
-    priority = request.GET.get('priority')
-    deadline = request.GET.get('deadline')
+    title = request.POST.get('title')
+    content = request.POST.get('content')
+    priority = request.POST.get('priority')
+    deadline = request.POST.get('deadline')
     todo = Todo(title=title, content=content, priority=priority, deadline=deadline)
     todo.save()
     context = {
@@ -32,9 +37,36 @@ def create(request):
         'priority': priority,
         'deadline': deadline,
     }
-    return render(request, 'todos/create.html', context)
+    return redirect('todos:detail', todo.pk)
 
 def delete(request, todo_pk):
-    dlt = Todo.objects.get(pk=todo_pk)
-    dlt.delete()
-    return render(request, 'todos/delete.html')
+    todo = Todo.objects.get(pk=todo_pk)
+    todo.delete()
+    return redirect('todos:index')
+
+def edit(request, todo_pk):
+    todo = Todo.objects.get(pk=todo_pk)
+    cur_date = date.today()
+    context = {
+        'todo': todo,
+        'cur_date' : cur_date
+    }
+    return render(request, 'todos/edit.html', context)
+
+def update(request, todo_pk):
+    todo = Todo.objects.get(pk=todo_pk)
+    todo.title = request.POST.get('title')
+    todo.content = request.POST.get('content')
+    todo.priority = request.POST.get('priority')
+    todo.deadline = request.POST.get('deadline')
+    todo.save()
+    return redirect('todos:detail', todo.pk)
+
+def check(request, todo_pk):
+    todo = Todo.objects.get(pk=todo_pk)
+    if todo.completed == True:
+        todo.completed = False
+    else:
+        todo.completed = True
+    todo.save()
+    return redirect('todos:index')
