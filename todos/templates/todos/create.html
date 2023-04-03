@@ -9,20 +9,29 @@
 {% endblock style %}
 
 {% block content %}
-  <h1>Todos CREATE</h1>
+{% load bootstrap5 %}
+  <h1>Todos NEW</h1>
   <hr>
-  <div class="card border-dark mb-3">
-    <div class="card-header">
-      {{ title }}
+  <form action="{%url 'todos:create' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% comment %} <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 제목</span>
+      <input type="text" id="title" name="title" class="form-control" placeholder="TITLE" aria-label="TITLE" aria-describedby="addon-wrapping">
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ content }}</li>
-      <li class="list-group-item">{{ priority }}</li>
-      <li class="list-group-item">{{ deadline }}</li>
-      <li class="list-group-item">{{ completed }}</li>
-    </ul>
-  </div>
-  <div class="d-grid">
-    <a href="{%url 'todos:index'%}" class="btn border-dark">BACK</a>
-  </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 내용</span>
+      <input type="textarea" id="content" name="content" class="form-control" placeholder="CONTENT" aria-label="CONTENT" aria-describedby="addon-wrapping">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 우선 순위</span>
+      <input type="number" id="priority" name="priority" class="form-control" placeholder="PRIOIRTY" aria-label="PRIOIRTY" aria-describedby="addon-wrapping">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">할 일 마감 기한</span>
+      <input type="date" id="deadline" name="deadline" class="form-control" placeholder="DEADLINE" aria-label="DEADLINE" aria-describedby="addon-wrapping" value="{{ cur_date|date:"Y-m-d" }}">
+    </div> {% endcomment %}
+    <div class="input-group flex-nowrap">
+      <input type="submit" class="form-control border-dark" placeholder="SUBMIT" aria-label="SUBMIT" aria-describedby="addon-wrapping">
+    </div>
 {% endblock content %}

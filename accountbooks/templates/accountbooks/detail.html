@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 5rem;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>AccountBooks DETAIL</h1>
+  <hr>
+
+  <div class="card border-dark" style="margin-bottom: 1rem;">
+    <div class="card-header">
+      {{ accountbook.pk }}. {{ accountbook.note }}</a>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">사용 내역 메모: {{ accountbook.description }}</li>
+      <li class="list-group-item">사용 내역 분류: {{ accountbook.category }}</li>
+      <li class="list-group-item">사용 금액: {{ accountbook.amount }}</li>
+      <li class="list-group-item">사용 날짜: {{ accountbook.date }}</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="row">
+      <div class="col">
+        <form action="{% url 'accountbooks:copy' accountbook.pk %}" method="POST">
+          {% csrf_token %}
+          <div class="d-grid">
+            <input class="btn bg-dark text-white" type="submit" value="COPY">
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <form action="{% url 'accountbooks:delete' accountbook.pk %}" method="POST">
+          {% csrf_token %}
+          <div class="d-grid">
+            <input class="btn border-dark" type="submit" value="DELETE">
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <div class="d-grid">
+          <a href="{%url 'accountbooks:edit' accountbook.pk %}" class="btn border-dark">EDIT</a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="d-grid">
+          <a href="{%url 'accountbooks:index'%}" class="btn border-dark">BACK</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

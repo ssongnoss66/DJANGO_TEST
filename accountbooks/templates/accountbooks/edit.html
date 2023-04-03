@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 5rem;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>AccountBooks EDIT</h1>
+  <hr>
+
+  <form action="{% url 'accountbooks:update' accountbook.pk %}" method="POST">
+    {% csrf_token %}
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">사용 내역</span>
+      <input type="text" id="note" name="note" class="form-control" placeholder="note" aria-label="note" aria-describedby="addon-wrapping" value="{{ accountbook.note }}">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">사용 내역 메모</span>
+      <input type="textarea" id="description" name="description" class="form-control" placeholder="description" aria-label="description" aria-describedby="addon-wrapping" value="{{ accountbook.description }}">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">사용 내역 분류</span>
+      <input type="text" id="category" name="category" class="form-control" placeholder="category" aria-label="category" aria-describedby="addon-wrapping" value="{{ accountbook.category }}">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">사용 금액</span>
+      <input type="number" id="amount" name="amount" class="form-control" placeholder="amount" aria-label="amount" aria-describedby="addon-wrapping" value="{{ accountbook.amount }}">
+    </div>
+    <div class="input-group flex-nowrap mb-3">
+      <span class="input-group-text" style="width:8rem;" id="addon-wrapping">사용 날짜</span>
+      <input type="date" id="date" name="date" class="form-control" placeholder="date" aria-label="date" aria-describedby="addon-wrapping" value="{{ accountbook.date }}">
+    </div>
+    <div class="input-group flex-nowrap">
+      <input type="submit" class="form-control border-dark" placeholder="SUBMIT" aria-label="SUBMIT" aria-describedby="addon-wrapping">
+    </div>
+  </form>
+{% endblock content %}

@@ -17,7 +17,7 @@
   <p>작성 시각: {{ article.created_at }}</p>
   <p>수정 시각: {{ article.updated_at }}</p>
   <hr>
-  <a href="{% url 'articles:edit' article.pk %}">[edit]</a>
+  <a href="{% url 'articles:update' article.pk %}">[edit]</a>
   <form action="{% url 'articles:delete' article.pk %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="DELETE">

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Todo
 from datetime import date
+from .forms import TodoForm
 
 # Create your views here.
 def index(request):
@@ -17,50 +18,41 @@ def detail(request, pk):
     }
     return render(request, 'todos/detail.html', context)
 
-def new(request):
-    cur_date = date.today()
-    context = {
-        'cur_date' : cur_date
-    }
-    return render(request, 'todos/new.html', context)
-
 def create(request):
-    title = request.POST.get('title')
-    content = request.POST.get('content')
-    priority = request.POST.get('priority')
-    deadline = request.POST.get('deadline')
-    todo = Todo(title=title, content=content, priority=priority, deadline=deadline)
-    todo.save()
+    if request.method == 'POST':
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            todo = form.save()
+            return redirect('todos:detail', todo.pk)
+    else:
+        cur_date = date.today()
+        form = TodoForm()
     context = {
-        'title': title,
-        'content': content,
-        'priority': priority,
-        'deadline': deadline,
+        'cur_date' : cur_date,
+        'form' : form,
     }
-    return redirect('todos:detail', todo.pk)
+    return render(request, 'todos/create.html', context)
+
 
 def delete(request, todo_pk):
     todo = Todo.objects.get(pk=todo_pk)
     todo.delete()
     return redirect('todos:index')
 
-def edit(request, todo_pk):
-    todo = Todo.objects.get(pk=todo_pk)
-    cur_date = date.today()
-    context = {
-        'todo': todo,
-        'cur_date' : cur_date
-    }
-    return render(request, 'todos/edit.html', context)
-
 def update(request, todo_pk):
     todo = Todo.objects.get(pk=todo_pk)
-    todo.title = request.POST.get('title')
-    todo.content = request.POST.get('content')
-    todo.priority = request.POST.get('priority')
-    todo.deadline = request.POST.get('deadline')
-    todo.save()
-    return redirect('todos:detail', todo.pk)
+    if request.method == 'POST':
+        form = TodoForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('todos:detail', todo.pk)
+    else:
+        form = TodoForm(instance=todo)
+    context = {
+        'todo': todo,
+        'form': form,
+    }
+    return render(request, 'todos/update.html', context)
 
 def check(request, todo_pk):
     todo = Todo.objects.get(pk=todo_pk)

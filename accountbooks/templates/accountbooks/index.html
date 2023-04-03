@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 5rem;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+  <h1>AccountBooks INDEX</h1>
+  <hr>
+
+  <div class="card border-dark" style="margin-bottom: 1rem;">
+    <div class="card-header">
+      0. <a href="{%url 'accountbooks:new'%}">NEW</a>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">새로운 사용 내역을 추가하세요.</li>
+    </ul>
+    {% for accountbook_pk in accountbooks %}
+    <div class="card-header">
+      {{ accountbook_pk.pk }}. <a href="{% url 'accountbooks:detail' accountbook_pk.pk %}">{{ accountbook_pk.note }}</a>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">사용 금액: {{ accountbook_pk.amount }}</li>
+      <li class="list-group-item">사용 날짜: {{ accountbook_pk.date }}</li>
+    </ul>
+    {% endfor %}
+  </div>
+{% endblock content %}

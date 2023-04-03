@@ -11,7 +11,7 @@
   <h1>ARTICLES</h1>
   <p>{{ articles }}</p>
   <hr>
-  <p>새로운 입력:<a href="{% url 'articles:new' %}">NEW</a></p>
+  <p>새로운 입력:<a href="{% url 'articles:create' %}">NEW</a></p>
   {% for article in articles %}
     <p>{{ article }}</p>
     <p>글 번호: {{ article.pk }}</p>
