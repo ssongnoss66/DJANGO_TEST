@@ -20,11 +20,12 @@ from django.urls import path, include
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda request: redirect('MarchTwentyThird/')),
+    path('', include('mainpg.urls')),
     path('admin/', admin.site.urls),
     path('apps/', include('apps.urls')),
     path('MarchTwentyThird/', include('MarchTwentyThird.urls')),
     path('articles/', include('articles.urls')),
     path('todos/', include('todos.urls')),
     path('accountbooks/', include('accountbooks.urls')),
+    path('accounts/', include('accounts.urls'))
 ]

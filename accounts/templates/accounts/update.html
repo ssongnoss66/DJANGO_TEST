@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  <style>
+    body {
+      margin: 5rem;
+    }
+  </style>
+{% endblock style %}
+
+{% block content %}
+{% load bootstrap5 %}
+  <h1>accounts UPDATE</h1>
+  <hr>
+  <form action="{% url 'accounts:update' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <div class="input-group flex-nowrap mb-3">
+      <input type="submit" class="form-control border-dark" placeholder="SUBMIT" aria-label="SUBMIT" aria-describedby="addon-wrapping">
+    </div>
+  </form>
+{% endblock content %}

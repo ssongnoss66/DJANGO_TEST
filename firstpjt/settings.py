@@ -31,12 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'mainpg',
     'apps',
     'MarchTwentyThird',
     'todos',
     'newspapers',
     'articles',
     'accountbooks',
+    'accounts',
     'django_extensions',
     'mathfilters',
     'bootstrap5',
@@ -132,3 +134,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 수정 전 기본값은 'auth.User'
+AUTH_USER_MODEL = 'accounts.User'
