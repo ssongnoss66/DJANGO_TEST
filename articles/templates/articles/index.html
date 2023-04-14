@@ -14,7 +14,11 @@
   <p>새로운 입력:<a href="{% url 'articles:create' %}">NEW</a></p>
   {% for article in articles %}
     <p>{{ article }}</p>
+    <p>작성자 : {{ article.user }} </p>
     <p>글 번호: {{ article.pk }}</p>
     <p>글 제목:<a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></p>
   {% endfor %}
+  {% load static %}
+  <img src="{% static 'articles/E8hijkMVEAI4dqV.jpg' %}" alt="img">
+  <img src="{% static 'CoD9h2VUkAAY1Sq.jpeg' %}" alt="img">
 {% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block style %}
+
+{% endblock style %}
+
+{% block content %}
+{% load bootstrap5 %}
+{% load static %}
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <img src="{% static 'logo.svg' %}" alt="img" height="40px" width="auto">
+      <div class="d-flex" role="share">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          이미지 공유
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">이미지 공유 폼</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form action="{% url 'albums:create' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <div class="modal-footer">
+                      <input type="submit" class="btn btn-outline-danger" value="이미지 공유">
+                    </div>
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div>
+    {% for album in albums %}
+      <div class="card" style="width: 18rem; float: left; margin-right: 2rem; margin-bottom: 2rem;">
+        <img src="{{ album.image.url }}" class="card-img-top" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">{{ album.content }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

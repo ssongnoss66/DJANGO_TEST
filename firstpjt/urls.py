@@ -18,6 +18,8 @@ from django.urls import path, include
 # WARNINGS: (urls.W005) URL namespace 'MayTwentyThird' isn't unique. You may not be able to reverse all URLs in this namespace
 # https://comdoc.tistory.com/entry/URL-namespace-xxx-isnt-unique
 from django.shortcuts import redirect
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('mainpg.urls')),
@@ -27,5 +29,7 @@ urlpatterns = [
     path('articles/', include('articles.urls')),
     path('todos/', include('todos.urls')),
     path('accountbooks/', include('accountbooks.urls')),
-    path('accounts/', include('accounts.urls'))
-]
+    path('accounts/', include('accounts.urls')),
+    path('albums/', include('albums.urls')),
+    path('reviews/', include('reviews.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

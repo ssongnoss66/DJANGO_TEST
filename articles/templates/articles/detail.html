@@ -12,15 +12,42 @@
   <h1>DETAIL</h1>
   <h3>{{ article.pk }}번째 글</h3>
   <hr>
+  <p>작성자: {{ article.user }}</p>
   <p>제목: {{ article.title }}</p>
   <p>내용: {{ article.content }}</p>
+  <p>댓글 목록</p>
+  <ul>
+    {% for comment in comments %}
+      <li>댓글 {{ comment.user }}: {{comment.content }}
+        {% if request.user == comment.user %}
+          <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="DELETE" class="btn btn-dark"> 
+          </form>
+        {% endif %}
+      </li>
+    {% empty %}
+      <p>댓글이 없습니다.</p>
+    {% endfor %}
+  </ul>
   <p>작성 시각: {{ article.created_at }}</p>
   <p>수정 시각: {{ article.updated_at }}</p>
-  <hr>
-  <a href="{% url 'articles:update' article.pk %}">[edit]</a>
-  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="img">
+  {% endif %}
+  <form action="{% url 'articles:comments_create' article.pk %}" method = "POST">
     {% csrf_token %}
-    <input type="submit" value="DELETE">
+    {{ comment_form }}
+    <input type="submit" class="btn btn-dark">
   </form>
-  <a href="{% url 'articles:index' %}">[back]</a>
+  <hr>
+  {% if request.user == article.user %}
+    <a href="{% url 'articles:update' article.pk %}" class="btn btn-secondary">EDIT</a>
+    <form action="{% url 'articles:delete' article.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="DELETE" class="btn btn-secondary">
+    </form>
+  {% endif %}
+  <a href="{% url 'articles:index' %}" class="btn btn-secondary">BACK</a>
+
 {% endblock content %}

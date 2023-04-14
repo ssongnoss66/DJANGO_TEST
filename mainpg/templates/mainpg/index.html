@@ -19,9 +19,11 @@
     <div class="row">
       <a href="{% url 'accountbooks:index' %}" class="btn border-dark mb-3">accountbooks</a>
       <a href="{% url 'accounts:login' %}" class="btn border-dark mb-3">accounts</a>
+      <a href="{% url 'albums:index' %}" class="btn border-dark mb-3">albums</a>
       <a href="{% url 'apps:throw' %}" class="btn border-dark mb-3">apps</a>
       <a href="{% url 'articles:index' %}" class="btn border-dark mb-3">articles</a>
       <a href="{% url 'MarchTwentyThird:inpt' %}" class="btn border-dark mb-3">MarchTwentyThird</a>
+      <a href="{% url 'reviews:index' %}" class="btn border-dark mb-3">reviews</a>
       <a href="{% url 'todos:index' %}" class="btn border-dark mb-3">todos</a>
       <a href="{% url 'accounts:update' %}" class="btn btn-dark mb-3">update</a>
       <form action="{% url 'accounts:logout' %}" method="POST">

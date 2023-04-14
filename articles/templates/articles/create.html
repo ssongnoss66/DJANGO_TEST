@@ -9,10 +9,10 @@
 {% endblock style %}
 {% block content %}
   <h1>CREATE</h1>
-  <form action="{% url 'articles:create' %}" method="POST">
+  <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">
+    <input type="submit" class="btn btn-secondary mb-2">
   </form>
-  <a href="{% url 'articles:index' %}">[back]</a>
+  <a href="{% url 'articles:index' %}" class="btn btn-secondary">BACK</a>
 {% endblock content %}

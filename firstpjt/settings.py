@@ -31,11 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'albums',
     'mainpg',
     'apps',
     'MarchTwentyThird',
     'todos',
     'newspapers',
+    'reviews',
     'articles',
     'accountbooks',
     'accounts',
@@ -129,6 +131,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 정적 파일 추가 경로
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# MEDIA_ROOT / MEDIA_URL
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

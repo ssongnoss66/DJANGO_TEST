@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block style %}
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+{% block content %}
+<h1>reviews INDEX</h1>
+<hr>
+<div class="card mb-2">
+  <div class="card-header">
+    0. <a href="{% url 'reviews:create' %}">NEW</a>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>새로운 영화 리뷰를 업로드하세요.</p>
+    </blockquote>
+  </div>
+</div>
+{% for review in reviews %}
+<div class="card mb-2">
+  <div class="card-header">
+    {{review.pk}}. <a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a>
+    {{ review.comment_set.count }} (작성자 : {{ review.user }})
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{ review.content }}</p>
+      <footer class="blockquote-footer"><cite title="Source Title">{{ review.movie }}</cite></footer>
+    </blockquote>
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}

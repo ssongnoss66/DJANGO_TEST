@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block style %}
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+{% endblock style %}
+{% block content %}
+{% load static %}
+  <h1>reviews DETAIL</h1>
+  <hr>
+  <div class="card">
+    <div class="row no-gutters">
+      <div class="col-3">
+        <img class="card-img-top" src="{{ review.image.url }}" alt="Card image cap">
+      </div>
+      <div class="col-9">
+        <div class="card-body">
+          <h4 class="card-title fw-bold">{{ review.movie }} : {{ review.title }}</h4>
+          <p class="card-text">{{ review.content }}</p>
+          <p class="card-text text-end">(작성자 : {{ review.user }})</p>
+        </div>
+        <hr>
+        <ul class="list-group list-group-flush">
+          {% for comment in comments %}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-11">
+                <p>댓글 {{ comment.pk }} : {{ comment.content }} (작성자 : {{ comment.user }})</p>
+              </div>
+              {% if comment.user == request.user %}
+              <div class="col text-end">
+                <form action="{% url 'reviews:comments_delete' review.pk comment.pk %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" value="" class="btn-close"> 
+                </form>
+              </div>
+              {% endif %}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        <hr>
+        <div class="card-body">
+          <form action="{% url 'reviews:comments_create' review.pk %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <div class="input-group-append">
+              <input class="btn btn-outline-secondary" type="submit">
+            </div>
+          </form>
+        </div>
+        <hr>
+        <div class="card-body">
+          {% if request.user == review.user %}
+          <div class="row">
+              <div class="col-4">
+                <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" value="DELETE" class="btn btn-dark mb-3 form-control">
+                </form>
+              </div>
+              
+              <div class="col-4">
+                <form action="{% url 'reviews:update' review.pk %}" method="POST">
+                  {% csrf_token %}
+                  <input type="submit" value="UPDATE" class="btn btn-dark mb-3 form-control">
+                </form>
+              </div>
+            <div class="col-4">
+          {% endif %}
+              <a href="{% url 'reviews:index' %}" class="btn btn-dark mb-3 form-control">BACK</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% comment %} <hr>
+  <ul>
+    <li>
+      <img src="{{ review.image.url }}" alt="img">
+    </li>
+    <li>리뷰 제목 : {{ review.title }}</li>
+    <li>리뷰 내용 : {{ review.content }}</li>
+    <li>영화 제목 : {{ review.movie }}</li>
+    {% for comment in comments %}
+    <li>댓글 {{comment.pk }} : {{ comment.content }}
+      <form action="{% url 'reviews:comments_delete' review.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="DELETE" class="btn btn-dark"> 
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+  <hr> {% endcomment %}
+
+  
+{% endblock content %}
