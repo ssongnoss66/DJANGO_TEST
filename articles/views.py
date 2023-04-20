@@ -30,7 +30,7 @@ def comments_create(request, pk):
         comment = comment_form.save(commit=False)
         comment.article = article
         comment.user = request.user
-        comment_form.save()
+        comment.save()
         return redirect('articles:detail', article.pk)
     context = {
         'article': article,
@@ -86,3 +86,12 @@ def update(request, pk):
         'form': form,
     }
     return render(request, 'articles/update.html', context)
+
+@login_required
+def likes(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    if article.like_users.filter(pk=request.user.pk).exists():
+        article.like_users.remove(request.user)
+    else:
+        article.like_users.add(request.user)
+    return redirect('articles:index')

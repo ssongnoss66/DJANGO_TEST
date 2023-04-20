@@ -31,15 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accountbooks',
     'albums',
     'mainpg',
     'apps',
+    'articles',
+    'hospitals',
     'MarchTwentyThird',
-    'todos',
     'newspapers',
     'reviews',
-    'articles',
-    'accountbooks',
+    'todos',
     'accounts',
     'django_extensions',
     'mathfilters',

@@ -11,12 +11,21 @@
   <h1>ARTICLES</h1>
   <p>{{ articles }}</p>
   <hr>
+  <a href="{% url 'accounts:profile' user.username %}">내 프로필</a>
   <p>새로운 입력:<a href="{% url 'articles:create' %}">NEW</a></p>
   {% for article in articles %}
     <p>{{ article }}</p>
-    <p>작성자 : {{ article.user }} </p>
+    <p>작성자 : <a href="{% url 'accounts:profile' article.user.username %}">{{ article.user }}</a></p>
     <p>글 번호: {{ article.pk }}</p>
     <p>글 제목:<a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></p>
+    <form action="{% url 'articles:likes' article.pk %}" method="POST">
+      {% csrf_token %}
+      {% if request.user in article.like_users.all %}
+        <input type="submit" value="좋아요 취소">
+      {% else %}
+        <input type="submit" value="좋아요">
+      {% endif %}
+    </form>
   {% endfor %}
   {% load static %}
   <img src="{% static 'articles/E8hijkMVEAI4dqV.jpg' %}" alt="img">
