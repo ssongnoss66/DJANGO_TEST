@@ -20,15 +20,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&_-87sdixja5e-wjjhfjvvbju7sa50z69e=cnrs3wk5uzg&$8@'
+import os
+from dotenv import load_dotenv
+
+"""
+load_dotenv()
+.env 파일의 key-value를 프로그램 환경 변수에 등록
+"""
+load_dotenv()
+
+
+"""
+환경 변수에서 key가 SECRET_KEY인 value 불러오기
+"""
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['port-0-django-test-1maxx2algukczqc.sel3.cloudtype.app']
 
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'accountbooks',
@@ -45,6 +60,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'mathfilters',
     'bootstrap5',
+    'debug_toolbar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +70,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -127,6 +144,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

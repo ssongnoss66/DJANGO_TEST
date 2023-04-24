@@ -3,19 +3,39 @@ from django.contrib.auth import login as auth_login, logout as auth_logout, upda
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.http import JsonResponse
 
 # Create your views here.
 @login_required
 def follow(request, user_pk):
     User = get_user_model()
-    person = User.objects.get(pk=user_pk)
-    if person != request.user:
-        if person.followers.filter(pk=request.user.pk).exists():
-        # if request.user in person.followers.all():
-            person.followers.remove(request.user)
+    you = User.objects.get(pk=user_pk)
+    me = request.user
+    if you != me:
+        if me in you.followers.all():
+            you.followers.remove(me)
+            is_followed = False
         else:
-            person.followers.add(request.user)
-    return redirect('accounts:profile', person.username)
+            you.followers.add(me)
+            is_followed = True
+        context = {
+            'is_followed': is_followed,
+            'followings_count': you.followings.count(),
+            'followers_count': you.followers.count(),
+        }
+        return JsonResponse(context)
+    return redirect('accounts:profile', you.username)
+
+# def follow(request, user_pk):
+#     User = get_user_model()
+#     person = User.objects.get(pk=user_pk)
+#     if person != request.user:
+#         if person.followers.filter(pk=request.user.pk).exists():
+#         # if request.user in person.followers.all():
+#             person.followers.remove(request.user)
+#         else:
+#             person.followers.add(request.user)
+#     return redirect('accounts:profile', person.username)
 
 def profile(request, username):
     User = get_user_model()
